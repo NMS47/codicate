@@ -1,0 +1,36 @@
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+on = "y"
+
+while on == "y":
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    cipher_text = ""
+    orientation = "normal" #This indicates if it is decode or encode.
+    #The next lines is to fix a bug when doing multiple uses of the programan didn't change encode to decode.
+    if direction == "decode" and orientation == "normal":
+        alphabet.reverse()
+    elif direction != "encode":
+        print("Please type again what you want to do: -code- or -decode-")
+    elif orientation == "backwards":
+        orientation == "normal"
+    
+    for letter in text:
+
+        if letter in alphabet:
+            num_alph = alphabet.index(letter)
+            if (num_alph + shift) < 26:
+                cipher_text += alphabet[num_alph + shift]
+                #The next line is in case the shift num is higher than letter in list alphabet
+            else:
+                rest = (num_alph + shift) % 26
+                cipher_text += alphabet[rest]
+                #The nest line is for any symbol or space.
+        else:
+            cipher_text += letter
+
+    print(f"Your {direction}d message is {cipher_text}")
+    on = input("Would you like to continue? y or n.\n").lower()
+      
+print("Thank you, goodbye.")
